@@ -6,16 +6,16 @@ Hazırlayan: Yalçın Gülşen (bireysel) · GitHub: [yalcingulsen](https://gith
 
 ## Klasör yapısı
 
-| Klasör | İçerik |
-|---|---|
-| `/api` | ASP.NET Core Web API (C#) |
-| `/mobile` | Flutter mobil uygulama (Dart) |
+|Klasör|İçerik|
+|-|-|
+|`/api`|ASP.NET Core Web API (C#)|
+|`/mobile`|Flutter mobil uygulama (Dart)|
 
 ## Kullanılan teknolojiler
 
-- Mobil: Flutter (Dart), Android
-- Web API: ASP.NET Core (.NET 10), Swagger
-- Veritabanı: Microsoft SQL Server, Entity Framework Core (2. haftada eklenecek)
+* Mobil: Flutter (Dart), Android
+* Web API: ASP.NET Core (.NET 10), Swagger
+* Veritabanı: Microsoft SQL Server, Entity Framework Core (2. haftada eklenecek)
 
 ## Web API'yi çalıştırma
 
@@ -33,7 +33,7 @@ Swagger arayüzü: http://localhost:5000/swagger
 
 ## Mobil uygulamayı çalıştırma
 
-Gereken: Flutter SDK (geliştirmede kullanılan sürüm: `FLUTTER_SURUMU_BURAYA`), Android Studio ve bir Android emülatörü
+Gereken: Flutter SDK (geliştirmede kullanılan sürüm: `3.47.8`), Android Studio ve bir Android emülatörü
 
 ```bash
 cd mobile
@@ -47,5 +47,6 @@ Android emülatörü bilgisayardaki API'ye `localhost` yerine `10.0.2.2` adresiy
 
 ## Haftalık ilerleme
 
-- [x] 1. hafta: Depo yapısı, Flutter karşılama ekranı, Web API iskeleti ve Swagger
-- [ ] 2. hafta: Veritabanı tasarımı, EF Core modelleri ve migration
+* \[x] 1. hafta: Depo yapısı, Flutter karşılama ekranı, Web API iskeleti ve Swagger
+* \[ ] 2. hafta: Veritabanı tasarımı, EF Core modelleri ve migration
+
