@@ -1,5 +1,6 @@
-using BerberRandevu.Api.Models;
+using BerberRandevu.Api.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BerberRandevu.Api.Controllers;
 
@@ -7,23 +8,30 @@ namespace BerberRandevu.Api.Controllers;
 [Route("api/[controller]")]
 public class HizmetlerController : ControllerBase
 {
-    private static readonly List<Hizmet> _hizmetler = new()
+    private readonly BerberDbContext _db;
+
+    public HizmetlerController(BerberDbContext db)
     {
-        new Hizmet { Id = 1, Ad = "Saç Kesimi", SureDakika = 30, Fiyat = 300 },
-        new Hizmet { Id = 2, Ad = "Sakal Tıraşı", SureDakika = 15, Fiyat = 150 },
-        new Hizmet { Id = 3, Ad = "Saç + Sakal", SureDakika = 45, Fiyat = 400 },
-    };
+        _db = db;
+    }
 
     [HttpGet]
-    public ActionResult<List<Hizmet>> GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_hizmetler);
+        var hizmetler = await _db.Hizmetler
+            .Select(h => new { h.Id, h.Ad, h.Aciklama, h.SureDakika, h.Fiyat })
+            .ToListAsync();
+        return Ok(hizmetler);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Hizmet> GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        var hizmet = _hizmetler.FirstOrDefault(h => h.Id == id);
+        var hizmet = await _db.Hizmetler
+            .Where(h => h.Id == id)
+            .Select(h => new { h.Id, h.Ad, h.Aciklama, h.SureDakika, h.Fiyat })
+            .FirstOrDefaultAsync();
+
         if (hizmet == null)
         {
             return NotFound();
