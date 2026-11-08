@@ -66,6 +66,30 @@ Swagger arayüzü: http://localhost:5000/swagger
 
 Veritabanı kontrolü: `GET /api/Saglik/veritabani` her tablodaki kayıt sayısını gösterir.
 
+### Uç noktalar (endpoints)
+
+| Yöntem | Adres | Ne yapar |
+|---|---|---|
+| GET | `/api/Berberler` | Aktif berberleri listeler (`?tumu=true` ile pasifler de gelir) |
+| GET | `/api/Berberler/{id}` | Tek berberi çalışma saatleriyle getirir |
+| POST | `/api/Berberler` | Berber ekler (Pzt-Cmt 09:00-19:00 çalışma saatleri otomatik eklenir) |
+| PUT | `/api/Berberler/{id}` | Berberi günceller |
+| DELETE | `/api/Berberler/{id}` | Berberi siler (randevusu varsa 409 döner) |
+| GET | `/api/Hizmetler` | Hizmetleri listeler |
+| GET | `/api/Hizmetler/{id}` | Tek hizmeti getirir |
+| POST | `/api/Hizmetler` | Hizmet ekler (aynı adla ikinci hizmet eklenemez) |
+| PUT | `/api/Hizmetler/{id}` | Hizmeti günceller |
+| DELETE | `/api/Hizmetler/{id}` | Hizmeti siler (randevuda kullanıldıysa 409 döner) |
+| GET | `/api/Saglik` | API çalışıyor mu |
+| GET | `/api/Saglik/veritabani` | Veritabanı bağlantısı ve kayıt sayıları |
+
+Ekleme ve güncellemede veriler DTO sınıflarıyla alınır (`api/Dtos`) ve DataAnnotations ile doğrulanır. Hatalı veri gelirse API `400 Bad Request` ile hangi alanın neden hatalı olduğunu Türkçe olarak döner.
+
+Örnek doğrulama kuralları:
+
+- Berber: ad soyad zorunlu (3-100 karakter), telefon `0555 111 22 33` biçiminde, fotoğraf adresi geçerli bir bağlantı
+- Hizmet: ad zorunlu (2-100 karakter), süre 5-240 dakika, fiyat 1-10000 TL
+
 ## Mobil uygulamayı çalıştırma
 
 Gereken: Flutter SDK (geliştirmede kullanılan sürüm: `3.47.8`), Android Studio ve bir Android emülatörü
@@ -84,4 +108,5 @@ Android emülatörü bilgisayardaki API'ye `localhost` yerine `10.0.2.2` adresiy
 
 - [x] 1. hafta: Depo yapısı, Flutter karşılama ekranı, Web API iskeleti ve Swagger
 - [x] 2. hafta: Veritabanı tasarımı, EF Core varlık sınıfları ve ilişkiler, ilk migration, örnek veriler, user-secrets
-- [ ] 3. hafta: Berber ve Hizmet için tam CRUD, DTO ve veri doğrulama
+- [x] 3. hafta: Berber ve Hizmet için tam CRUD, DTO ve veri doğrulama
+- [ ] 4. hafta: Flutter klasör yapısı, model sınıfları, API servis katmanı (dio), go_router, berber listesi ve detay ekranları
